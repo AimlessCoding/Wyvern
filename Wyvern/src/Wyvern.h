@@ -61,6 +61,7 @@ namespace wyv
 		static bool VulkanIsAvailable();
 
 		static VkInstance GetInstance() { return g_instance; }
+		static VkPhysicalDevice GetPhysicalDevice() { return g_physicalDevice; }
 	};
 }
 

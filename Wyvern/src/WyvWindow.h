@@ -15,7 +15,8 @@ namespace wyv
 	{
 		GLFWwindow *m_window;
 		unsigned m_width, m_height;
-		VkSurfaceKHR m_surface;
+		VkSurfaceKHR m_surface = VK_NULL_HANDLE;
+		VkSwapchainKHR m_swapchain = VK_NULL_HANDLE;
 
 	public:
 		WyvWindow(std::string _title, unsigned _width, unsigned _height);

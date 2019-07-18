@@ -19,7 +19,7 @@ bool Wyvern::g_throwOnError = true;
 WyvCode Wyvern::g_verbosity = WYV_ERROR;
 std::stack<std::pair<WyvCode, std::string>> Wyvern::g_log = std::stack<std::pair<WyvCode, std::string>>();
 std::function<void(WyvCode, std::string)> Wyvern::g_logCallback = nullptr;
-VkDebugUtilsMessengerEXT Wyvern::g_debugMessenger = nullptr;
+VkDebugUtilsMessengerEXT Wyvern::g_debugMessenger = VK_NULL_HANDLE;
 
 VkInstance Wyvern::g_instance = 0;
 VkPhysicalDevice Wyvern::g_physicalDevice = VK_NULL_HANDLE;
@@ -135,9 +135,9 @@ void Wyvern::Initialize()
 		VkApplicationInfo appInfo = {};
 		appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 		appInfo.pApplicationName = "Wyvern Engine";
-		appInfo.applicationVersion = VK_MAKE_VERSION(1, 0, 0);
+		appInfo.applicationVersion = VK_MAKE_VERSION(0, 1, 1);
 		appInfo.pEngineName = "Wyvern";
-		appInfo.engineVersion = VK_MAKE_VERSION(1, 0, 0);
+		appInfo.engineVersion = VK_MAKE_VERSION(0, 1, 1);
 		appInfo.apiVersion = VK_API_VERSION_1_1;
 
 		std::vector<const char*> validationLayers = GetValidationLayers();
@@ -182,6 +182,7 @@ void Wyvern::Initialize()
 
 		std::vector<const char*> deviceExtensions = GetRequiredDeviceExtensions();
 
+		//Missing device checks for surface capabilities, formats and presentation modes
 		int i, qFamily = -1;
 		for (i = 0; i < devices.size(); i++)
 		{
